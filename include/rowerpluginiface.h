@@ -18,19 +18,13 @@
 
 #pragma once
 
-#include <QtCore/qobject.h>
-#include <QtCore/qplugin.h>
-
 /*!
  * @class RowerPluginInterface
  * Interface definition for rower machine plugins
  */
-class RowerPluginInterface : public QObject
+class RowerPluginInterface
 {
-    Q_OBJECT
-
 public:
-    RowerPluginInterface(QObject *parent = 0) : QObject(parent) {}
     /*!
      * Destructor.
      */
@@ -40,32 +34,31 @@ public:
      *
      * @return version info
      */
-    virtual int version() const = 0;
+    virtual int getVersion() const = 0;
 
     /*!
      * Get the row machine serial number.
      *
      * @return serial number
      */
-    virtual int serialNumber() const = 0;
+    virtual int getSerialNumber() const = 0;
 
-Q_SLOTS:
     /*!
      * Set fixed distance workout.
      * @param distance distance to set the workout
      */
-    virtual void fixedDistanceWorkout(int distance) = 0;
+    virtual void setFixedDistanceWorkout(int distance) = 0;
 
     /*!
      * Set fixed time workout.
      * @param time time to set the workout
      */
-    virtual void fixedTimeWorkout(int time) = 0;
+    virtual void setFixedTimeWorkout(int time) = 0;
 
     /*!
      * Set quick start workout.
      */
-    virtual void justRow() = 0;
+    virtual void setJustRow() = 0;
 
     /*!
      * Reset the workout.
@@ -77,54 +70,53 @@ Q_SLOTS:
      */
     virtual void idle() = 0;
 
-Q_SIGNALS:
     /*!
-     * Emitted when the odometr is changed
-     * @param new odometr 
+     * Get the odometr.
+     * @param odometr 
      */
-    virtual odometr(int) const = 0;
+    virtual int getOdometr() = 0;
       
     /*!
-     * Emitted when the drag factor is changed
-     * @param new drag factor 
+     * Get the drag factor.
+     * @param drag factor 
      */
-    virtual int dragFactor(int) const = 0;
+    virtual int getDragFactor() = 0;
       
     /*!
-     * Emitted when the work time is changed
-     * @param new work time 
+     * Get the workout time.
+     * @param workout time 
      */
-    virtual int workTime(int) const = 0;
+    virtual int getWorkoutTime() = 0;
     
     /*!
-     * Emitted when the distance is changed
-     * @param new distance 
+     * Get the distance.
+     * @param distance 
      */
-    virtual int distance(int) const = 0;
+    virtual int getDistance() = 0;
     
     /*!
-     * Emitted when the current 500m pace is changed
-     * @param new 500m pace 
+     * Get the current 500m pace.
+     * @param 500m pace 
      */
-    virtual int current500mPace(int) const = 0;
+    virtual int getCurrent500mPace() = 0;
     
     /*!
-     * Emitted when the stroke is changed
-     * @param new stroke rating 
+     * Get the stroke rating.
+     * @param stroke rating 
      */
-    virtual int strokeRating(int) const = 0;
+    virtual int getStrokeRating() = 0;
+    
+    /*!ing
+     * Get the stroke state.
+     * @param stroke state 
+     */
+    virtual int gtStrokeState() = 0;
     
     /*!
-     * Emitted when the stroke state is changed
-     * @param new stroke state 
+     * Get the heart rate.
+     * @param heart rate 
      */
-    virtual int strokeState(int) const = 0;
-    
-    /*!
-     * Emitted when the heart rate is changed
-     * @param new heart rate 
-     */
-    virtual int heartRate(int) const = 0;
+    virtual int getHeartRate() = 0;
 
 };
 
