@@ -1,3 +1,4 @@
 TEMPLATE = subdirs
-SUBDIRS = monitor \
-    plugins
+CONFIG += ordered 
+SUBDIRS = plugins \
+        monitor

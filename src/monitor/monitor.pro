@@ -1,16 +1,17 @@
 TEMPLATE = app
-TARGET = rower-monitor
+TARGET = rower
+DESTDIR = ../../bin
 QT += gui
 
-HEADERS += interface.h \
-    mainwindow.h 
+HEADERS += monitor.h
 SOURCES += main.cpp \
-    mainwindow.cpp
+            monitor.cpp
 
 INCLUDEPATH += . \
-    ../
+    ../ \
     ../plugins \
-    ../../include
+    ../../include \
+    ../../lib
 
 CONFIG += debug_and_release \
     build_all 

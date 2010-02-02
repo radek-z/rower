@@ -18,6 +18,8 @@
 
 #pragma once
 
+#include <QtPlugin>
+
 /*!
  * @class RowerPluginInterface
  * Interface definition for rower machine plugins
@@ -29,21 +31,7 @@ public:
      * Destructor.
      */
     virtual ~RowerPluginInterface() {}
-    /*!
-     * Get version information of row machine.
-     *
-     * @return version info
-     */
-    virtual int getVersion() const = 0;
-
-    /*!
-     * Get the row machine serial number.
-     *
-     * @return serial number
-     */
-    virtual int getSerialNumber() const = 0;
-
-    /*!
+        /*!
      * Set fixed distance workout.
      * @param distance distance to set the workout
      */
@@ -69,54 +57,69 @@ public:
      * Idle the workout.
      */
     virtual void idle() = 0;
+    
+    /*!
+     * Get version information of row machine.
+     *
+     * @return version info
+     */
+    virtual int getVersion() const = 0;
+
+    /*!
+     * Get the row machine serial number.
+     *
+     * @return serial number
+     */
+    virtual int getSerialNumber() const = 0;
+
 
     /*!
      * Get the odometr.
      * @param odometr 
      */
-    virtual int getOdometr() = 0;
+    virtual int getOdometr() const = 0;
       
     /*!
      * Get the drag factor.
      * @param drag factor 
      */
-    virtual int getDragFactor() = 0;
+    virtual int getDragFactor() const = 0;
       
     /*!
      * Get the workout time.
      * @param workout time 
      */
-    virtual int getWorkoutTime() = 0;
+    virtual int getWorkoutTime() const = 0;
     
     /*!
      * Get the distance.
      * @param distance 
      */
-    virtual int getDistance() = 0;
+    virtual int getDistance() const = 0;
     
     /*!
      * Get the current 500m pace.
      * @param 500m pace 
      */
-    virtual int getCurrent500mPace() = 0;
+    virtual int getCurrent500mPace() const = 0;
     
     /*!
      * Get the stroke rating.
      * @param stroke rating 
      */
-    virtual int getStrokeRating() = 0;
+    virtual int getStrokeRating() const = 0;
     
     /*!ing
      * Get the stroke state.
      * @param stroke state 
      */
-    virtual int gtStrokeState() = 0;
+    virtual int getStrokeState() const = 0;
     
     /*!
      * Get the heart rate.
      * @param heart rate 
      */
-    virtual int getHeartRate() = 0;
+    virtual int getHeartRate() const = 0;
 
 };
 

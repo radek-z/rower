@@ -24,35 +24,33 @@
 /*!
  * @class Concept2Plugin
  */
-class Concept2Plugin : public RowerPluginInterface
+class Concept2Plugin : public QObject, public RowerPluginInterface
 {
     Q_OBJECT
     Q_INTERFACES(RowerPluginInterface)
 
 public:
-    Concept2Plugin(QObject *parent = 0);
+    Concept2Plugin();
     ~Concept2Plugin();
-    int version() const;
-    int serialNumber() const;
-
-public Q_SLOTS:
-    void fixedDistanceWorkout(int distance);
-    void fixedTimeWorkout(int time);
-    void justRow();
+    
+    void setFixedDistanceWorkout(int distance);
+    void setFixedTimeWorkout(int time);
+    void setJustRow();
     void reset();
     void idle();
 
-public Q_SIGNALS:
-    void odometr(int);
-    void dragFactor(int);
-    void workTime(int);
-    void distance(int);
-    void current500mPace(int);
-    void strokeRating(int);
-    void strokeState(int);
-    void heartRate(int);
+    int getVersion() const;
+    int getSerialNumber() const;
+    int getOdometr() const;
+    int getDragFactor() const;
+    int getWorkoutTime() const;
+    int getDistance() const;
+    int getCurrent500mPace() const;
+    int getStrokeRating() const;
+    int getStrokeState() const;
+    int getHeartRate() const;
 
 private:
     class Private;
-    Private *d; 
+    Private *priv; 
 };
