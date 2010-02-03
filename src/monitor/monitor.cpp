@@ -23,15 +23,14 @@ void Monitor::loadPlugin()
 
     Q_FOREACH(QString fileName, dir.entryList(QDir::Files))
     {
-        qDebug() << "fileName: " <<fileName;
-        qDebug() << "filePath: " <<dir.absoluteFilePath(fileName);
         QPluginLoader loader(dir.absoluteFilePath(fileName));
         
         if (loader.load())
             qDebug() << "Plugin loaded";
         else
             qDebug() << "Plugin ERROR:" << loader.errorString();
-        QObject *iRower = loader.instance();
+        
+        RowerPluginInterface *iRower = qobject_cast<RowerPluginInterface *>(loader.instance());
         if (iRower)
             qDebug() << "SUCCESS plugin: " << fileName;
     }

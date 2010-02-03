@@ -35,33 +35,49 @@ public:
 
     void run()
     {
+
+        struct usb_device *initDev;
+        
+        if ((initDev = getDevice()) == NULL)
+        {
+            qDebug() << "Device NOT found";
+        }
+
+        else 
+        {
+            usbDev = usb_open(initDev);
+        }
+
+        exec();
+    }
+
+    struct usb_device *getDevice()
+    {
+        qDebug() << Q_FUNC_INFO;
         usb_init();
         struct usb_device *dev;
         struct usb_bus *bus;
 
-        bool foundMonitor = FALSE;
-       
-        while (!foundMonitor)
-        {
-            usb_find_busses();
-            usb_find_devices();
-            for (bus = usb_get_busses(); bus && !foundMonitor; bus = bus->next)
-                for (dev = bus->devices; dev; dev = dev->next)
+        usb_find_busses();
+        usb_find_devices();
+        for (bus = usb_get_busses(); bus; bus = bus->next)
+            for (dev = bus->devices; dev; dev = dev->next)
+            {
+                qDebug() << "VendorID: " << dev->descriptor.idVendor;
+                if (dev->descriptor.idVendor == 6052)
                 {
-                    {
-                        qDebug("Device found: VendorID:%d, ProductID:%d", dev->descriptor.idVendor, dev->descriptor.idProduct);
-                        foundMonitor = TRUE;
-                    }
+                    return dev;
                 }
-            usbDev = usb_open(dev);
-        }
+            }
+
+        return NULL;
     }
 
     bool getDataFromPM(const char *send, char *received) const
     {
         if (usbDev == NULL)
         {
-            qCritical("Device unconnected");
+            qWarning("Device unconnected");
             return FALSE;
         }
         
@@ -104,7 +120,9 @@ public:
 };
 
 Concept2Plugin::Concept2Plugin() : priv(new Private(this))
-{}
+{
+    priv->start();
+}
 
 Concept2Plugin::~Concept2Plugin()
 {}

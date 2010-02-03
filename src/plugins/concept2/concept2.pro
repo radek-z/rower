@@ -16,6 +16,8 @@ INCLUDEPATH += . \
     ../ \
     ../../../include
 
+LIBS += -L/usr/lib -lusb
+
 headers.files = $$HEADERS
 target.path = $${INSTALL_PREFIX}/lib/rower
 INSTALLS = target
